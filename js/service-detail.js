@@ -257,7 +257,7 @@ const serviceDetailsData = {
             "Industry-Academia Partnership Blueprint"
         ],
         nextLabel: "Back to All Services",
-        nextHref: "services.html"
+        nextHref: ""
     }
 };
 
