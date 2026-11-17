@@ -1,0 +1,745 @@
+.hero-navy-bg {
+    background-color: #060f1e;
+    background-image: 
+        radial-gradient(circle at 30% 26%, rgba(30, 67, 122, 0.55) 0%, rgba(19, 44, 82, 0.35) 38%, rgba(10, 25, 48, 0.2) 65%, transparent 85%),
+        radial-gradient(circle at 75% 55%, rgba(37, 99, 235, 0.22) 0%, rgba(19, 44, 82, 0.15) 45%, transparent 72%),
+        linear-gradient(145deg, #0a1930 0%, #071224 55%, #050c18 100%);
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes floatFast {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}
+.animate-float-slow { animation: floatSlow 5.5s ease-in-out infinite; }
+.animate-float-fast { animation: floatFast 4.2s ease-in-out infinite; }
+
+
+  /* About section: Animated Shine & Border Pulse for Mission & Vision Cards */
+        @keyframes shimmerSweep {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            100% { transform: translateX(250%) skewX(-20deg); }
+        }
+        @keyframes orbitSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .mv-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+        }
+        .mv-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.22);
+        }
+        .mv-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.14), transparent);
+            transform: translateX(-150%) skewX(-20deg);
+            pointer-events: none;
+        }
+        .mv-card:hover::before {
+            animation: shimmerSweep 1.1s ease-in-out forwards;
+        }
+        .animate-orbit-slow {
+            animation: orbitSpin 18s linear infinite;
+        }
+
+        /* About section: Animated Shine & Border Pulse for Mission & Vision Cards */
+
+         /* About section: Animation for breadcrumbs */
+        @keyframes gridBreathe {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.55;
+    }
+    50% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
+@keyframes scanSweep {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.animate-grid-breathe {
+    animation: gridBreathe 9s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+.animate-grid-scan {
+    animation: scanSweep 7s linear infinite;
+}
+
+ /* About section: Animation for breadcrumbs */
+
+/* Services styles */
+/* Keep scroll-driven transforms instant (no lag), while keeping color/shadow smooth */
+.service-card {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+    will-change: transform;
+}
+
+.service-card:hover {
+    box-shadow: 0 28px 55px -15px rgba(10, 25, 48, 0.28);
+}
+
+.service-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa, #ffffff);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 3;
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(59, 130, 246, 0.18),
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+/* Services styles */
+
+
+/* faq styles */ 
+
+/* Smooth Hardware-Accelerated FAQ Drawer */
+.faq-answer-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item[data-open="true"] .faq-answer-wrapper {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item[data-open="true"] .faq-answer-inner {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.08s;
+}
+
+/* Active Left Accent Beam */
+.faq-beam {
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item[data-open="true"] .faq-beam {
+    transform: scaleY(1);
+}
+
+/* Plus-to-Cross Rotation */
+.faq-toggle-icon {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-item[data-open="true"] .faq-toggle-icon {
+    transform: rotate(45deg);
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: transparent;
+}
+
+/* faq styles */
+
+
+/* testimonal styles */
+.testimonial-stage-content {
+    transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonial-stage-content.is-switching {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Active Client Selector Card Indicator */
+.testimonial-tab {
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonial-tab[data-active="true"] {
+    background-color: rgba(37, 99, 235, 0.16);
+    border-color: rgba(96, 165, 250, 0.55);
+    transform: translateY(-2px);
+}
+
+/* Scroll-Triggered Unfold Entrance for Testimonial Deck */
+.testimonial-unfold-shell {
+    opacity: 0;
+    transform: perspective(1100px) rotateX(18deg) translateY(36px) scale(0.95);
+    transform-origin: top center;
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonial-unfold-shell.is-unfolded {
+    opacity: 1;
+    transform: perspective(1100px) rotateX(0deg) translateY(0px) scale(1);
+}
+
+/* Smooth Horizontal Sliding Track for 4 Testimonial Cards */
+.testimonial-slider-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.testimonial-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+/* testimonal styles */
+
+
+/* ===================================================================== */
+/* INTERACTIVE EXECUTIVE TEAM PROFILE CARDS                              */
+/* ===================================================================== */
+.team-card {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s ease,
+                border-color 0.35s ease;
+}
+
+.team-card:hover {
+    box-shadow: 0 30px 60px -15px rgba(10, 25, 48, 0.25);
+    border-color: rgba(37, 99, 235, 0.45);
+}
+
+/* Top Electric-Blue Horizon Bar */
+.team-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa, #ffffff);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 20;
+}
+
+.team-card:hover::after,
+.team-card.is-active::after {
+    transform: scaleX(1);
+}
+
+/* Portrait Monochrome-to-Color Zoom */
+.team-portrait {
+    filter: grayscale(35%) contrast(1.04);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
+}
+
+.team-card:hover .team-portrait,
+.team-card.is-active .team-portrait {
+    filter: grayscale(0%) contrast(1.02);
+    transform: scale(1.06);
+}
+
+/* Slide-Up Glass Dossier Drawer */
+.team-dossier-drawer {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+.team-card:hover .team-dossier-drawer,
+.team-card.is-active .team-dossier-drawer {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+/* Staggered Social Icon Pop-In */
+.team-social-btn {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+}
+
+.team-card:hover .team-social-btn,
+.team-card.is-active .team-social-btn {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.team-card:hover .team-social-btn:nth-child(1),
+.team-card.is-active .team-social-btn:nth-child(1) { transition-delay: 0.08s; }
+
+.team-card:hover .team-social-btn:nth-child(2),
+.team-card.is-active .team-social-btn:nth-child(2) { transition-delay: 0.14s; }
+
+.team-card:hover .team-social-btn:nth-child(3),
+.team-card.is-active .team-social-btn:nth-child(3) { transition-delay: 0.20s; }
+
+/* INTERACTIVE EXECUTIVE TEAM PROFILE CARDS */
+
+
+/* ===================================================================== */
+/* INTERACTIVE INSIGHTS & RESEARCH DOSSIER TERMINAL                      */
+/* ===================================================================== */
+.insight-card {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s ease,
+                border-color 0.35s ease,
+                opacity 0.35s ease;
+}
+
+.insight-card:hover {
+    box-shadow: 0 28px 55px -15px rgba(10, 25, 48, 0.22);
+    border-color: rgba(37, 99, 235, 0.45);
+}
+
+.insight-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa, #ffffff);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.insight-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Slide-Over Research Reader Drawer */
+.reader-backdrop {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.reader-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.reader-panel {
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reader-backdrop.is-open .reader-panel {
+    transform: translateX(0%);
+}
+
+/* ===================================================================== */
+/* INTERACTIVE CONTACT & MANDATE SCOPING ANIMATIONS                      */
+/* ===================================================================== */
+@keyframes contactRevealUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-animate-in {
+    opacity: 0;
+    animation: contactRevealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.contact-delay-1 { animation-delay: 0.08s; }
+.contact-delay-2 { animation-delay: 0.16s; }
+.contact-delay-3 { animation-delay: 0.24s; }
+.contact-delay-4 { animation-delay: 0.32s; }
+
+/* Interactive Channel Cards */
+.contact-channel-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+}
+
+.contact-channel-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(37, 99, 235, 0.45);
+    box-shadow: 0 22px 45px -15px rgba(10, 25, 48, 0.18);
+}
+
+.contact-channel-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa, #ffffff);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-channel-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Practice Chip Toggle */
+.practice-chip {
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.practice-chip[data-selected="true"] {
+    background-color: #0a1930;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 8px 20px -6px rgba(37, 99, 235, 0.45);
+    transform: translateY(-1px);
+}
+
+/* Form Input Focus Glow */
+.executive-input {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.executive-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    background-color: #ffffff;
+}
+
+/* Animated Submission Receipt Card */
+@keyframes dossierPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(16px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.dossier-receipt-animate {
+    animation: dossierPopIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* common floating buttons  */
+
+/* =========================================================
+   PRODENTS ORBITAL CONTACT SPEED-DIAL
+   ========================================================= */
+.prodents-orbital-dock {
+    position: fixed;
+    bottom: 28px;
+    right: 26px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Main Trigger Button */
+.orbital-trigger {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #0a1930 0%, #132c52 55%, #2563eb 140%);
+    border: 1px solid rgba(96, 165, 250, 0.45);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 14px 34px -6px rgba(10, 25, 48, 0.65),
+                0 0 20px rgba(37, 99, 235, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    animation: gentleFloat 4s ease-in-out infinite;
+    overflow: visible;
+}
+
+.orbital-trigger:hover {
+    transform: scale(1.07);
+    box-shadow: 0 18px 40px -6px rgba(37, 99, 235, 0.6),
+                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+/* Rotating Dashed Ring Around Trigger */
+.orbital-ring {
+    position: absolute;
+    inset: -7px;
+    border-radius: 25px;
+    border: 1.5px dashed rgba(96, 165, 250, 0.45);
+    animation: spinSlow 14s linear infinite;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.prodents-orbital-dock.is-open .orbital-ring {
+    border-color: #3b82f6;
+    transform: scale(1.06);
+}
+
+/* Diagonal Glass Shimmer Sweep */
+.orbital-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orbital-shimmer::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transform: rotate(25deg);
+    animation: shimmerSweep 4.5s infinite ease-in-out;
+}
+
+/* Live Status Green-Cyan Beacon */
+.orbital-beacon {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #38bdf8;
+    border: 2.5px solid #0a1930;
+    box-shadow: 0 0 10px #38bdf8;
+    z-index: 3;
+}
+
+.orbital-beacon::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid #38bdf8;
+    animation: beaconPulse 2s infinite ease-out;
+}
+
+/* Trigger Icons Morphing */
+.orbital-trigger svg {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.orbital-trigger .icon-close {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+.prodents-orbital-dock.is-open .icon-open {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+.prodents-orbital-dock.is-open .icon-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Expandable Action Stack */
+.orbital-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 16px;
+    pointer-events: none;
+}
+
+.prodents-orbital-dock.is-open .orbital-items {
+    pointer-events: auto;
+}
+
+.orbital-action {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(22px) scale(0.75);
+    transition: opacity 0.35s ease,
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: calc((3 - var(--i)) * 45ms);
+}
+
+.prodents-orbital-dock.is-open .orbital-action {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: calc(var(--i) * 65ms);
+}
+
+/* Node Glass Box */
+.orbital-node {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: rgba(10, 25, 48, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    color: #93c5fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px -5px rgba(6, 15, 30, 0.5);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.orbital-node svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* Primary WhatsApp Node Highlight */
+.orbital-whatsapp .orbital-node {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-color: rgba(191, 219, 254, 0.7);
+    color: #ffffff;
+}
+
+/* Hover States on Action Items */
+.orbital-action:hover .orbital-node {
+    background: #2563eb;
+    border-color: #ffffff;
+    color: #ffffff;
+    transform: scale(1.12) rotate(-6deg);
+    box-shadow: 0 12px 28px -4px rgba(37, 99, 235, 0.65);
+}
+
+.orbital-action:hover .orbital-node svg {
+    transform: scale(1.1);
+}
+
+/* Glass Tooltip Pill */
+.orbital-tooltip {
+    padding: 7px 14px;
+    border-radius: 12px;
+    background: rgba(10, 25, 48, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.32);
+    color: #f8fafc;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(6, 15, 30, 0.35);
+    transform: translateX(6px);
+    transition: all 0.3s ease;
+}
+
+.orbital-action:hover .orbital-tooltip {
+    background: #0a1930;
+    border-color: #60a5fa;
+    color: #ffffff;
+    transform: translateX(0);
+}
+
+/* Keyframes */
+@keyframes spinSlow {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes shimmerSweep {
+    0%, 65% { left: -120%; }
+    100% { left: 160%; }
+}
+
+@keyframes beaconPulse {
+    0% { transform: scale(1); opacity: 0.85; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+@media (max-width: 640px) {
+    .prodents-orbital-dock {
+        bottom: 20px;
+        right: 18px;
+    }
+    .orbital-trigger {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+    }
+}
